@@ -1,3 +1,12 @@
+---
+title: API Reference
+language_tabs:
+  - http
+  - shell
+
+search: true
+---
+
 # Finance
 
 ## Get merchant transactions from billing.invoice table
