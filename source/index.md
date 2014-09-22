@@ -7,7 +7,6 @@ language_tabs:
 search: true
 ---
 
-
 # Finance
 
 ## Get merchant transactions from billing.invoice table
