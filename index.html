@@ -13,7 +13,7 @@
 
       <script>
         $(function() {
-          setupLanguages(["shell","ruby","python"]);
+          setupLanguages(["http","shell"]);
         });
       </script>
   </head>
@@ -28,9 +28,8 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
+              <a href="#" data-language-name="http">http</a>
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -38,160 +37,343 @@
         <ul class="search-results"></ul>
       <div id="toc">
       </div>
-        <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
-
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="http://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
+        <h1 id='finance'>Finance</h1><h2 id='get-merchant-transactions-from-billing-invoice-table'>Get merchant transactions from billing.invoice table</h2>
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>Request</p>
 </blockquote>
-<pre class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<pre class="highlight http"><span class="nf">GET</span> <span class="nn">/merchant/merchants/{merchant_id}/finance/transactions/registry.{format}?datetime_from=2014-09-21&amp;datetime_to=2014-09-22&amp;limit=1&amp;offset=1&amp;in_transfer_currency=xsolla&amp;show_total=xsolla</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">User-Agent</span><span class="p">:</span> <span class="s">xsolla-api-client/1.0</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api.xsolla.com</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic ZGVtb0B4c29sbGEuY29tOmRlbW8=</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 </pre>
-<pre class="highlight python"><span class="kn">import</span> <span class="s">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">Kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</pre>
-<pre class="highlight shell"><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre class="highlight shell"><span class="gp">$ </span>curl -v <span class="s1">'https://api.xsolla.com/merchant/merchants/{merchant_id}/finance/transactions/registry.{format}?datetime_from=2014-09-21&amp;datetime_to=2014-09-22&amp;limit=1&amp;offset=1&amp;in_transfer_currency=xsolla&amp;show_total=xsolla'</span> <span class="se">\</span>
+-X GET <span class="se">\</span>
+-u user_id:api_key
 </pre>
 
 <blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
+<p>Response</p>
 </blockquote>
+<pre class="highlight http"><span class="err">HTTP/1.1 200
+Content-Type: application/json
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+[
+    {
+        "IdProject": "1",
+        "NameProject": "1. Demo Project",
+        "TransferDateFormat": "21.09.2014 17:02",
+        "IdInvoice": "16575",
+        "ReqInGame": "xso test4",
+        "CodeInstance": "389. Paybyme (ARS)",
+        "PaymentSum": "10 ARS",
+        "CommissionXsolla": "0 ARS (5.00%)",
+        "CommissionPs": "0 ARS (60.00%)",
+        "PayoutSum": "0 ARS (78.80%)",
+        "UserCommission": "2.12 ARS (21.20%)",
+        "CommissionAgentReal": "0 ARS (65.00%)",
+        "NominalSum": 0,
+        "RefundReason": "",
+        "NameStatus": "xsollaRefundFailed",
+        "IsoCountry": "TR",
+        "Phone": "905414468107",
+        "Email": "",
+        "TestProject": "0",
+        "ExternalCommission": "0%",
+        "OutProject": 0
+    },
+    {
+        "IdProject": "1",
+        "NameProject": "1. Demo Project",
+        "TransferDateFormat": "21.09.2014 13:23",
+        "IdInvoice": "86854",
+        "ReqInGame": "test76 2",
+        "CodeInstance": "16. QIWI (RUB)",
+        "PaymentSum": "3 RUB",
+        "CommissionXsolla": "0.17 RUB (5.00%)",
+        "CommissionPs": "0.17 RUB (5.00%)",
+        "PayoutSum": "3 RUB (100.00%)",
+        "UserCommission": "0 RUB (0.00%)",
+        "CommissionAgentReal": "0 RUB (10.00%)",
+        "NominalSum": 3,
+        "RefundReason": "",
+        "NameStatus": "done",
+        "IsoCountry": "RU",
+        "Phone": "79638581817",
+        "Email": "",
+        "TestProject": "0",
+        "ExternalCommission": "0%",
+        "OutProject": 3
+    },
+    {
+        "IdProject": "1",
+        "NameProject": "1. Demo Project",
+        "TransferDateFormat": "21.09.2014 09:55",
+        "IdInvoice": "63415",
+        "ReqInGame": "demo 1",
+        "CodeInstance": "27. Yandex.Money (RUB)",
+        "PaymentSum": "1 RUB",
+        "CommissionXsolla": "0 RUB (5.00%)",
+        "CommissionPs": "0 RUB (5.00%)",
+        "PayoutSum": "0 RUB (100.00%)",
+        "UserCommission": "0 RUB (0.00%)",
+        "CommissionAgentReal": "0 RUB (10.00%)",
+        "NominalSum": 0,
+        "RefundReason": "",
+        "NameStatus": "xsollaRefundFailed",
+        "IsoCountry": "RU",
+        "Phone": "",
+        "Email": "",
+        "TestProject": "0",
+        "ExternalCommission": "0%",
+        "OutProject": 0
+    },
+    {
+        "IdProject": "1",
+        "NameProject": "1. Demo Project",
+        "TransferDateFormat": "21.09.2014 09:33",
+        "IdInvoice": "1634",
+        "ReqInGame": "demo 1",
+        "CodeInstance": "27. Yandex.Money (RUB)",
+        "PaymentSum": "1 RUB",
+        "CommissionXsolla": "0.06 RUB (5.00%)",
+        "CommissionPs": "0.06 RUB (5.00%)",
+        "PayoutSum": "1 RUB (100.00%)",
+        "UserCommission": "0 RUB (0.00%)",
+        "CommissionAgentReal": "0 RUB (10.00%)",
+        "NominalSum": 1,
+        "RefundReason": "",
+        "NameStatus": "done",
+        "IsoCountry": "RU",
+        "Phone": "",
+        "Email": "",
+        "TestProject": "0",
+        "ExternalCommission": "0%",
+        "OutProject": 1
+    },
+    {
+        "IdProject": "1",
+        "NameProject": "1. Demo Project",
+        "TransferDateFormat": "21.09.2014 09:12",
+        "IdInvoice": "60025",
+        "ReqInGame": "demo 1",
+        "CodeInstance": "27. Yandex.Money (RUB)",
+        "PaymentSum": "1 RUB",
+        "CommissionXsolla": "0.06 RUB (5.00%)",
+        "CommissionPs": "0.06 RUB (5.00%)",
+        "PayoutSum": "1 RUB (100.00%)",
+        "UserCommission": "0 RUB (0.00%)",
+        "CommissionAgentReal": "0 RUB (10.00%)",
+        "NominalSum": 1,
+        "RefundReason": "",
+        "NameStatus": "done",
+        "IsoCountry": "RU",
+        "Phone": "",
+        "Email": "",
+        "TestProject": "0",
+        "ExternalCommission": "0%",
+        "OutProject": 1
+    }
+]
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
-
-<p><aside class="notice">
-You must replace <code class="prettyprint">meowmeowmeow</code> with your personal API key.
-</aside></p>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h1><pre class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</pre>
-<pre class="highlight python"><span class="kn">import</span> <span class="s">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">Kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</pre>
-<pre class="highlight shell">curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
 </span></pre>
+<pre class="highlight shell"><span class="o">[</span>
+    <span class="o">{</span>
+        <span class="s2">"IdProject"</span>: <span class="s2">"1"</span>,
+        <span class="s2">"NameProject"</span>: <span class="s2">"1. Demo Project"</span>,
+        <span class="s2">"TransferDateFormat"</span>: <span class="s2">"21.09.2014 17:02"</span>,
+        <span class="s2">"IdInvoice"</span>: <span class="s2">"16575"</span>,
+        <span class="s2">"ReqInGame"</span>: <span class="s2">"xso test4"</span>,
+        <span class="s2">"CodeInstance"</span>: <span class="s2">"389. Paybyme (ARS)"</span>,
+        <span class="s2">"PaymentSum"</span>: <span class="s2">"10 ARS"</span>,
+        <span class="s2">"CommissionXsolla"</span>: <span class="s2">"0 ARS (5.00%)"</span>,
+        <span class="s2">"CommissionPs"</span>: <span class="s2">"0 ARS (60.00%)"</span>,
+        <span class="s2">"PayoutSum"</span>: <span class="s2">"0 ARS (78.80%)"</span>,
+        <span class="s2">"UserCommission"</span>: <span class="s2">"2.12 ARS (21.20%)"</span>,
+        <span class="s2">"CommissionAgentReal"</span>: <span class="s2">"0 ARS (65.00%)"</span>,
+        <span class="s2">"NominalSum"</span>: 0,
+        <span class="s2">"RefundReason"</span>: <span class="s2">""</span>,
+        <span class="s2">"NameStatus"</span>: <span class="s2">"xsollaRefundFailed"</span>,
+        <span class="s2">"IsoCountry"</span>: <span class="s2">"TR"</span>,
+        <span class="s2">"Phone"</span>: <span class="s2">"905414468107"</span>,
+        <span class="s2">"Email"</span>: <span class="s2">""</span>,
+        <span class="s2">"TestProject"</span>: <span class="s2">"0"</span>,
+        <span class="s2">"ExternalCommission"</span>: <span class="s2">"0%"</span>,
+        <span class="s2">"OutProject"</span>: 0
+    <span class="o">}</span>,
+    <span class="o">{</span>
+        <span class="s2">"IdProject"</span>: <span class="s2">"1"</span>,
+        <span class="s2">"NameProject"</span>: <span class="s2">"1. Demo Project"</span>,
+        <span class="s2">"TransferDateFormat"</span>: <span class="s2">"21.09.2014 13:23"</span>,
+        <span class="s2">"IdInvoice"</span>: <span class="s2">"86854"</span>,
+        <span class="s2">"ReqInGame"</span>: <span class="s2">"test76 2"</span>,
+        <span class="s2">"CodeInstance"</span>: <span class="s2">"16. QIWI (RUB)"</span>,
+        <span class="s2">"PaymentSum"</span>: <span class="s2">"3 RUB"</span>,
+        <span class="s2">"CommissionXsolla"</span>: <span class="s2">"0.17 RUB (5.00%)"</span>,
+        <span class="s2">"CommissionPs"</span>: <span class="s2">"0.17 RUB (5.00%)"</span>,
+        <span class="s2">"PayoutSum"</span>: <span class="s2">"3 RUB (100.00%)"</span>,
+        <span class="s2">"UserCommission"</span>: <span class="s2">"0 RUB (0.00%)"</span>,
+        <span class="s2">"CommissionAgentReal"</span>: <span class="s2">"0 RUB (10.00%)"</span>,
+        <span class="s2">"NominalSum"</span>: 3,
+        <span class="s2">"RefundReason"</span>: <span class="s2">""</span>,
+        <span class="s2">"NameStatus"</span>: <span class="s2">"done"</span>,
+        <span class="s2">"IsoCountry"</span>: <span class="s2">"RU"</span>,
+        <span class="s2">"Phone"</span>: <span class="s2">"79638581817"</span>,
+        <span class="s2">"Email"</span>: <span class="s2">""</span>,
+        <span class="s2">"TestProject"</span>: <span class="s2">"0"</span>,
+        <span class="s2">"ExternalCommission"</span>: <span class="s2">"0%"</span>,
+        <span class="s2">"OutProject"</span>: 3
+    <span class="o">}</span>,
+    <span class="o">{</span>
+        <span class="s2">"IdProject"</span>: <span class="s2">"1"</span>,
+        <span class="s2">"NameProject"</span>: <span class="s2">"1. Demo Project"</span>,
+        <span class="s2">"TransferDateFormat"</span>: <span class="s2">"21.09.2014 09:55"</span>,
+        <span class="s2">"IdInvoice"</span>: <span class="s2">"63415"</span>,
+        <span class="s2">"ReqInGame"</span>: <span class="s2">"demo 1"</span>,
+        <span class="s2">"CodeInstance"</span>: <span class="s2">"27. Yandex.Money (RUB)"</span>,
+        <span class="s2">"PaymentSum"</span>: <span class="s2">"1 RUB"</span>,
+        <span class="s2">"CommissionXsolla"</span>: <span class="s2">"0 RUB (5.00%)"</span>,
+        <span class="s2">"CommissionPs"</span>: <span class="s2">"0 RUB (5.00%)"</span>,
+        <span class="s2">"PayoutSum"</span>: <span class="s2">"0 RUB (100.00%)"</span>,
+        <span class="s2">"UserCommission"</span>: <span class="s2">"0 RUB (0.00%)"</span>,
+        <span class="s2">"CommissionAgentReal"</span>: <span class="s2">"0 RUB (10.00%)"</span>,
+        <span class="s2">"NominalSum"</span>: 0,
+        <span class="s2">"RefundReason"</span>: <span class="s2">""</span>,
+        <span class="s2">"NameStatus"</span>: <span class="s2">"xsollaRefundFailed"</span>,
+        <span class="s2">"IsoCountry"</span>: <span class="s2">"RU"</span>,
+        <span class="s2">"Phone"</span>: <span class="s2">""</span>,
+        <span class="s2">"Email"</span>: <span class="s2">""</span>,
+        <span class="s2">"TestProject"</span>: <span class="s2">"0"</span>,
+        <span class="s2">"ExternalCommission"</span>: <span class="s2">"0%"</span>,
+        <span class="s2">"OutProject"</span>: 0
+    <span class="o">}</span>,
+    <span class="o">{</span>
+        <span class="s2">"IdProject"</span>: <span class="s2">"1"</span>,
+        <span class="s2">"NameProject"</span>: <span class="s2">"1. Demo Project"</span>,
+        <span class="s2">"TransferDateFormat"</span>: <span class="s2">"21.09.2014 09:33"</span>,
+        <span class="s2">"IdInvoice"</span>: <span class="s2">"1634"</span>,
+        <span class="s2">"ReqInGame"</span>: <span class="s2">"demo 1"</span>,
+        <span class="s2">"CodeInstance"</span>: <span class="s2">"27. Yandex.Money (RUB)"</span>,
+        <span class="s2">"PaymentSum"</span>: <span class="s2">"1 RUB"</span>,
+        <span class="s2">"CommissionXsolla"</span>: <span class="s2">"0.06 RUB (5.00%)"</span>,
+        <span class="s2">"CommissionPs"</span>: <span class="s2">"0.06 RUB (5.00%)"</span>,
+        <span class="s2">"PayoutSum"</span>: <span class="s2">"1 RUB (100.00%)"</span>,
+        <span class="s2">"UserCommission"</span>: <span class="s2">"0 RUB (0.00%)"</span>,
+        <span class="s2">"CommissionAgentReal"</span>: <span class="s2">"0 RUB (10.00%)"</span>,
+        <span class="s2">"NominalSum"</span>: 1,
+        <span class="s2">"RefundReason"</span>: <span class="s2">""</span>,
+        <span class="s2">"NameStatus"</span>: <span class="s2">"done"</span>,
+        <span class="s2">"IsoCountry"</span>: <span class="s2">"RU"</span>,
+        <span class="s2">"Phone"</span>: <span class="s2">""</span>,
+        <span class="s2">"Email"</span>: <span class="s2">""</span>,
+        <span class="s2">"TestProject"</span>: <span class="s2">"0"</span>,
+        <span class="s2">"ExternalCommission"</span>: <span class="s2">"0%"</span>,
+        <span class="s2">"OutProject"</span>: 1
+    <span class="o">}</span>,
+    <span class="o">{</span>
+        <span class="s2">"IdProject"</span>: <span class="s2">"1"</span>,
+        <span class="s2">"NameProject"</span>: <span class="s2">"1. Demo Project"</span>,
+        <span class="s2">"TransferDateFormat"</span>: <span class="s2">"21.09.2014 09:12"</span>,
+        <span class="s2">"IdInvoice"</span>: <span class="s2">"60025"</span>,
+        <span class="s2">"ReqInGame"</span>: <span class="s2">"demo 1"</span>,
+        <span class="s2">"CodeInstance"</span>: <span class="s2">"27. Yandex.Money (RUB)"</span>,
+        <span class="s2">"PaymentSum"</span>: <span class="s2">"1 RUB"</span>,
+        <span class="s2">"CommissionXsolla"</span>: <span class="s2">"0.06 RUB (5.00%)"</span>,
+        <span class="s2">"CommissionPs"</span>: <span class="s2">"0.06 RUB (5.00%)"</span>,
+        <span class="s2">"PayoutSum"</span>: <span class="s2">"1 RUB (100.00%)"</span>,
+        <span class="s2">"UserCommission"</span>: <span class="s2">"0 RUB (0.00%)"</span>,
+        <span class="s2">"CommissionAgentReal"</span>: <span class="s2">"0 RUB (10.00%)"</span>,
+        <span class="s2">"NominalSum"</span>: 1,
+        <span class="s2">"RefundReason"</span>: <span class="s2">""</span>,
+        <span class="s2">"NameStatus"</span>: <span class="s2">"done"</span>,
+        <span class="s2">"IsoCountry"</span>: <span class="s2">"RU"</span>,
+        <span class="s2">"Phone"</span>: <span class="s2">""</span>,
+        <span class="s2">"Email"</span>: <span class="s2">""</span>,
+        <span class="s2">"TestProject"</span>: <span class="s2">"0"</span>,
+        <span class="s2">"ExternalCommission"</span>: <span class="s2">"0%"</span>,
+        <span class="s2">"OutProject"</span>: 1
+    <span class="o">}</span>
+<span class="o">]</span>
+</pre>
 
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h1>
-<p><code class="prettyprint">GET http://example.com/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h1>
+<p>Get transactions registry</p>
+<h3 id='http-request'>HTTP REQUEST</h3>
+<p><code class="prettyprint">GET https://api.xsolla.com/merchant/merchants/{merchant_id}/finance/transactions/registry.{format}</code></p>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Default</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>merchant_id</td>
+<td>int</td>
+<td>Merchant ID</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>format</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>datetime_from</td>
+<td>datetime</td>
+<td></td>
+</tr>
+<tr>
+<td>datetime_to</td>
+<td>datetime</td>
+<td></td>
+</tr>
+<tr>
+<td>project_id (optional)</td>
+<td>int</td>
+<td>Project ID</td>
+</tr>
+<tr>
+<td>show_dry_run (optional)</td>
+<td>boolean</td>
+<td>Show test payments</td>
+</tr>
+<tr>
+<td>transfer_id (optional)</td>
+<td>int</td>
+<td></td>
+</tr>
+<tr>
+<td>report_id (optional)</td>
+<td>int</td>
+<td></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>int</td>
+<td>Limit</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>int</td>
+<td>Offset</td>
+</tr>
+<tr>
+<td>in_transfer_currency</td>
+<td>string</td>
+<td>Calculate in currency of transfer</td>
+</tr>
+<tr>
+<td>show_total</td>
+<td>string</td>
+<td>Show Summary for CSV and XML data</td>
 </tr>
 </tbody></table>
-
-<p><aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside></p>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h1><pre class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</pre>
-<pre class="highlight python"><span class="kn">import</span> <span class="s">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">Kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</pre>
-<pre class="highlight shell">curl <span class="s2">"http://example.com/api/kittens/3"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></pre>
-
-<p>This endpoint retrieves a specific kitten.</p>
-
-<p><aside class="warning">If you&rsquo;re not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside></p>
-<h3 id='http-request'>HTTP Request</h1>
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h1>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the cat to retrieve</td>
-</tr>
-</tbody></table>
-
-          <h1 id='errors'>Errors</h1>
-<p><aside class="notice">This error section is stored in a separate file in <code class="prettyprint">includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the <code class="prettyprint">includes</code> folder and add them to the top of your <code class="prettyprint">index.md</code>&rsquo;s frontmatter. Files are included in the order listed.</aside></p>
-
-<p>The Kittn API uses the following error codes:</p>
-
+<h1 id='error-codes'>Error Codes</h1>
 <table><thead>
 <tr>
 <th>Error Code</th>
@@ -199,57 +381,16 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
-</tr>
-<tr>
 <td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slown down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td>Not found</td>
 </tr>
 </tbody></table>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
+                <a href="#" data-language-name="http">http</a>
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
           </div>
       </div>
     </div>
