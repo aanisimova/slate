@@ -1,168 +1,296 @@
----
-title: API Reference
+# Finance
 
-language_tabs:
-  - shell
-  - ruby
-  - python
+## Get merchant transactions from billing.invoice table
 
-toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
+> Request
 
-includes:
-  - errors
-
-search: true
----
-
-# Introduction
-
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
-
-# Authentication
-
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
+``` http
+GET /merchant/merchants/{merchant_id}/finance/transactions/registry.{format}?datetime_from=2014-09-21&datetime_to=2014-09-22&limit=1&offset=1&in_transfer_currency=xsolla&show_total=xsolla HTTP/1.1
+User-Agent: xsolla-api-client/1.0
+Host: api.xsolla.com
+Accept: application/json
+Authorization: Basic ZGVtb0B4c29sbGEuY29tOmRlbW8=
+Content-Type: application/json
 ```
 
-```python
-import 'kittn'
-
-api = Kittn.authorize('meowmeowmeow')
+``` shell
+$ curl -v 'https://api.xsolla.com/merchant/merchants/{merchant_id}/finance/transactions/registry.{format}?datetime_from=2014-09-21&datetime_to=2014-09-22&limit=1&offset=1&in_transfer_currency=xsolla&show_total=xsolla' \
+-X GET \
+-u user_id:api_key
 ```
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+> Response
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+``` http
+HTTP/1.1 200
+Content-Type: application/json
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace `meowmeowmeow` with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import 'kittn'
-
-api = Kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
 [
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Isis",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
+    {
+        "IdProject": "1",
+        "NameProject": "1. Demo Project",
+        "TransferDateFormat": "21.09.2014 17:02",
+        "IdInvoice": "16575",
+        "ReqInGame": "xso test4",
+        "CodeInstance": "389. Paybyme (ARS)",
+        "PaymentSum": "10 ARS",
+        "CommissionXsolla": "0 ARS (5.00%)",
+        "CommissionPs": "0 ARS (60.00%)",
+        "PayoutSum": "0 ARS (78.80%)",
+        "UserCommission": "2.12 ARS (21.20%)",
+        "CommissionAgentReal": "0 ARS (65.00%)",
+        "NominalSum": 0,
+        "RefundReason": "",
+        "NameStatus": "xsollaRefundFailed",
+        "IsoCountry": "TR",
+        "Phone": "905414468107",
+        "Email": "",
+        "TestProject": "0",
+        "ExternalCommission": "0%",
+        "OutProject": 0
+    },
+    {
+        "IdProject": "1",
+        "NameProject": "1. Demo Project",
+        "TransferDateFormat": "21.09.2014 13:23",
+        "IdInvoice": "86854",
+        "ReqInGame": "test76 2",
+        "CodeInstance": "16. QIWI (RUB)",
+        "PaymentSum": "3 RUB",
+        "CommissionXsolla": "0.17 RUB (5.00%)",
+        "CommissionPs": "0.17 RUB (5.00%)",
+        "PayoutSum": "3 RUB (100.00%)",
+        "UserCommission": "0 RUB (0.00%)",
+        "CommissionAgentReal": "0 RUB (10.00%)",
+        "NominalSum": 3,
+        "RefundReason": "",
+        "NameStatus": "done",
+        "IsoCountry": "RU",
+        "Phone": "79638581817",
+        "Email": "",
+        "TestProject": "0",
+        "ExternalCommission": "0%",
+        "OutProject": 3
+    },
+    {
+        "IdProject": "1",
+        "NameProject": "1. Demo Project",
+        "TransferDateFormat": "21.09.2014 09:55",
+        "IdInvoice": "63415",
+        "ReqInGame": "demo 1",
+        "CodeInstance": "27. Yandex.Money (RUB)",
+        "PaymentSum": "1 RUB",
+        "CommissionXsolla": "0 RUB (5.00%)",
+        "CommissionPs": "0 RUB (5.00%)",
+        "PayoutSum": "0 RUB (100.00%)",
+        "UserCommission": "0 RUB (0.00%)",
+        "CommissionAgentReal": "0 RUB (10.00%)",
+        "NominalSum": 0,
+        "RefundReason": "",
+        "NameStatus": "xsollaRefundFailed",
+        "IsoCountry": "RU",
+        "Phone": "",
+        "Email": "",
+        "TestProject": "0",
+        "ExternalCommission": "0%",
+        "OutProject": 0
+    },
+    {
+        "IdProject": "1",
+        "NameProject": "1. Demo Project",
+        "TransferDateFormat": "21.09.2014 09:33",
+        "IdInvoice": "1634",
+        "ReqInGame": "demo 1",
+        "CodeInstance": "27. Yandex.Money (RUB)",
+        "PaymentSum": "1 RUB",
+        "CommissionXsolla": "0.06 RUB (5.00%)",
+        "CommissionPs": "0.06 RUB (5.00%)",
+        "PayoutSum": "1 RUB (100.00%)",
+        "UserCommission": "0 RUB (0.00%)",
+        "CommissionAgentReal": "0 RUB (10.00%)",
+        "NominalSum": 1,
+        "RefundReason": "",
+        "NameStatus": "done",
+        "IsoCountry": "RU",
+        "Phone": "",
+        "Email": "",
+        "TestProject": "0",
+        "ExternalCommission": "0%",
+        "OutProject": 1
+    },
+    {
+        "IdProject": "1",
+        "NameProject": "1. Demo Project",
+        "TransferDateFormat": "21.09.2014 09:12",
+        "IdInvoice": "60025",
+        "ReqInGame": "demo 1",
+        "CodeInstance": "27. Yandex.Money (RUB)",
+        "PaymentSum": "1 RUB",
+        "CommissionXsolla": "0.06 RUB (5.00%)",
+        "CommissionPs": "0.06 RUB (5.00%)",
+        "PayoutSum": "1 RUB (100.00%)",
+        "UserCommission": "0 RUB (0.00%)",
+        "CommissionAgentReal": "0 RUB (10.00%)",
+        "NominalSum": 1,
+        "RefundReason": "",
+        "NameStatus": "done",
+        "IsoCountry": "RU",
+        "Phone": "",
+        "Email": "",
+        "TestProject": "0",
+        "ExternalCommission": "0%",
+        "OutProject": 1
+    }
+]
+
+```
+
+``` shell
+[
+    {
+        "IdProject": "1",
+        "NameProject": "1. Demo Project",
+        "TransferDateFormat": "21.09.2014 17:02",
+        "IdInvoice": "16575",
+        "ReqInGame": "xso test4",
+        "CodeInstance": "389. Paybyme (ARS)",
+        "PaymentSum": "10 ARS",
+        "CommissionXsolla": "0 ARS (5.00%)",
+        "CommissionPs": "0 ARS (60.00%)",
+        "PayoutSum": "0 ARS (78.80%)",
+        "UserCommission": "2.12 ARS (21.20%)",
+        "CommissionAgentReal": "0 ARS (65.00%)",
+        "NominalSum": 0,
+        "RefundReason": "",
+        "NameStatus": "xsollaRefundFailed",
+        "IsoCountry": "TR",
+        "Phone": "905414468107",
+        "Email": "",
+        "TestProject": "0",
+        "ExternalCommission": "0%",
+        "OutProject": 0
+    },
+    {
+        "IdProject": "1",
+        "NameProject": "1. Demo Project",
+        "TransferDateFormat": "21.09.2014 13:23",
+        "IdInvoice": "86854",
+        "ReqInGame": "test76 2",
+        "CodeInstance": "16. QIWI (RUB)",
+        "PaymentSum": "3 RUB",
+        "CommissionXsolla": "0.17 RUB (5.00%)",
+        "CommissionPs": "0.17 RUB (5.00%)",
+        "PayoutSum": "3 RUB (100.00%)",
+        "UserCommission": "0 RUB (0.00%)",
+        "CommissionAgentReal": "0 RUB (10.00%)",
+        "NominalSum": 3,
+        "RefundReason": "",
+        "NameStatus": "done",
+        "IsoCountry": "RU",
+        "Phone": "79638581817",
+        "Email": "",
+        "TestProject": "0",
+        "ExternalCommission": "0%",
+        "OutProject": 3
+    },
+    {
+        "IdProject": "1",
+        "NameProject": "1. Demo Project",
+        "TransferDateFormat": "21.09.2014 09:55",
+        "IdInvoice": "63415",
+        "ReqInGame": "demo 1",
+        "CodeInstance": "27. Yandex.Money (RUB)",
+        "PaymentSum": "1 RUB",
+        "CommissionXsolla": "0 RUB (5.00%)",
+        "CommissionPs": "0 RUB (5.00%)",
+        "PayoutSum": "0 RUB (100.00%)",
+        "UserCommission": "0 RUB (0.00%)",
+        "CommissionAgentReal": "0 RUB (10.00%)",
+        "NominalSum": 0,
+        "RefundReason": "",
+        "NameStatus": "xsollaRefundFailed",
+        "IsoCountry": "RU",
+        "Phone": "",
+        "Email": "",
+        "TestProject": "0",
+        "ExternalCommission": "0%",
+        "OutProject": 0
+    },
+    {
+        "IdProject": "1",
+        "NameProject": "1. Demo Project",
+        "TransferDateFormat": "21.09.2014 09:33",
+        "IdInvoice": "1634",
+        "ReqInGame": "demo 1",
+        "CodeInstance": "27. Yandex.Money (RUB)",
+        "PaymentSum": "1 RUB",
+        "CommissionXsolla": "0.06 RUB (5.00%)",
+        "CommissionPs": "0.06 RUB (5.00%)",
+        "PayoutSum": "1 RUB (100.00%)",
+        "UserCommission": "0 RUB (0.00%)",
+        "CommissionAgentReal": "0 RUB (10.00%)",
+        "NominalSum": 1,
+        "RefundReason": "",
+        "NameStatus": "done",
+        "IsoCountry": "RU",
+        "Phone": "",
+        "Email": "",
+        "TestProject": "0",
+        "ExternalCommission": "0%",
+        "OutProject": 1
+    },
+    {
+        "IdProject": "1",
+        "NameProject": "1. Demo Project",
+        "TransferDateFormat": "21.09.2014 09:12",
+        "IdInvoice": "60025",
+        "ReqInGame": "demo 1",
+        "CodeInstance": "27. Yandex.Money (RUB)",
+        "PaymentSum": "1 RUB",
+        "CommissionXsolla": "0.06 RUB (5.00%)",
+        "CommissionPs": "0.06 RUB (5.00%)",
+        "PayoutSum": "1 RUB (100.00%)",
+        "UserCommission": "0 RUB (0.00%)",
+        "CommissionAgentReal": "0 RUB (10.00%)",
+        "NominalSum": 1,
+        "RefundReason": "",
+        "NameStatus": "done",
+        "IsoCountry": "RU",
+        "Phone": "",
+        "Email": "",
+        "TestProject": "0",
+        "ExternalCommission": "0%",
+        "OutProject": 1
+    }
 ]
 ```
 
-This endpoint retrieves all kittens.
+Get transactions registry
 
-### HTTP Request
+### HTTP REQUEST
 
-`GET http://example.com/kittens`
+`GET https://api.xsolla.com/merchant/merchants/{merchant_id}/finance/transactions/registry.{format}`
 
-### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+Parameter | Type | Description
+--------- | ---- | -----------
+merchant_id | int | Merchant ID
+format |  |
+datetime_from | datetime |
+datetime_to | datetime |
+project_id (optional) | int | Project ID
+show_dry_run (optional) | boolean | Show test payments
+transfer_id (optional) | int |
+report_id (optional) | int |
+limit | int | Limit
+offset | int | Offset
+in_transfer_currency | string | Calculate in currency of transfer
+show_total | string | Show Summary for CSV and XML data
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
 
-## Get a Specific Kitten
+# Error Codes
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import 'kittn'
-
-api = Kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/3"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Isis",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">If you're not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the cat to retrieve
-
+Error Code | Meaning
+---------- | -------
+404 | Not found
